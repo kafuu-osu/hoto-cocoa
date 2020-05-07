@@ -4,7 +4,7 @@
       ref="footerLayoutBox"
       id="footer-layout-box"
     >
-      页脚
+      <div>PurePeace 2020</div>
     </div>
   </div>
 </template>
@@ -22,9 +22,11 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: orange;
-  padding: 0 10px;
-  height: 50px;
+  background-color: #424242;
+  justify-content: center;
+  color: #FAFAFA;
+  padding: 20px;
+  min-height: 140px;
 }
 
 </style>

@@ -60,9 +60,9 @@ export default {
   },
   watch: {
     screenWidth (val) {
+      if (this.showMask) this.$store.commit('setThemeOpenSider', false)
       if (!this.watingRefresh) {
         this.screenWidth = val
-        if (this.showMask) this.$store.commit('setThemeOpenSider', false)
 
         this.watingRefresh = true
         setTimeout(() => {

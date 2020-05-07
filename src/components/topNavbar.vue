@@ -69,9 +69,9 @@ export default {
     display: flex;
     align-items: center;
     width: 100%;
-    background-color: red;
+    background-color: #FAFAFA;
     padding: 0 10px;
-    box-shadow: 0 2px 8px #f0f1f2;
+    box-shadow: 0 2px 4px rgba(223, 223, 223, .5);
   }
 
   .top-navbar-box-fixed {
@@ -99,6 +99,7 @@ export default {
     cursor: pointer;
     transition: .4s ease;
     color: black;
+    user-select: none;
   }
 
   .sidebar-open-control-button:hover {

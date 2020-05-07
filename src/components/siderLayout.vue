@@ -12,7 +12,22 @@
         :class="siderLayoutBoxClass"
       >
         <div id="sider-layout-content">
-          <div id="logo-box" />
+          <div id="logo-box">
+            <div id="logo-box-content">
+              <div>
+                <img
+                  style="height: 40px; margin: 0 4px;"
+                  src="@/assets/biglogo_min.png"
+                >
+              </div>
+              <div
+                style="transition: .2s ease; text-align: center;"
+                :style="logoTextStyle"
+              >
+                osu!Kafuu
+              </div>
+            </div>
+          </div>
           <div>
             zzz
           </div>
@@ -47,10 +62,16 @@ export default {
       return this.fixed ? 'sider-layout-box-fixed' : 'sider-layout-box-common'
     },
     siderLayoutWidth () {
-      return `width: ${this.boxWidth}px;`
+      return `width: ${this.boxWidth}px; opacity: ${this.boxOpacity};`
     },
     boxWidth () {
       return this.open ? 220 : this.mini ? 0 : 70
+    },
+    boxOpacity () {
+      return this.open ? 1 : this.mini ? 0.8 : 1
+    },
+    logoTextStyle () {
+      return this.open ? 'opacity: 1; width: 90px;' : 'opacity: 0; width: 0;'
     }
   }
 
@@ -63,9 +84,10 @@ export default {
   display: flex;
   justify-content: center;
   height: 100%;
-  background-color: green;
+  background-color: #fafafa;
   transition: .4s ease;
   overflow: hidden;
+  box-shadow: 2px 0 4px rgba(223, 223, 223, .5);
 }
 
 .sider-layout-box-fixed {
@@ -88,13 +110,27 @@ export default {
 #sider-layout-content {
   width: 100%;
   padding: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #logo-box {
-  background-color: blue;
   width: 100%;
   height: 50px;
+  font-size: 16px;
+  font-weight: bold;
   margin-bottom: 20px;
+  user-select: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+#logo-box-content {
+  display: flex;
+  align-items: center;
 }
 
 .slide-fade-enter-active {
