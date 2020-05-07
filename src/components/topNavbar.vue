@@ -12,13 +12,20 @@
       :class="topNavbarBoxClass"
     >
       <div id="top-navbar-content">
-        你好
+        <div
+          class="sidebar-open-control-button"
+          @click="sidebarOpenSwitch"
+        >
+          <a-icon :type="themeOpenSider ? 'menu-fold' : 'menu-unfold'" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     fixed: {
@@ -27,13 +34,25 @@ export default {
     },
     height: {
       type: Number,
-      default: 50
+      default: 70
     }
   },
-  mounted () {
-    this.isMounted = true
+  methods: {
+    sidebarOpenSwitch () {
+      this.$store.commit('setThemeOpenSider')
+    },
+    sidebarFixedSwitch () {
+      this.$store.commit('setThemeSiderFixed')
+    },
+    topNavbarFixedSwitch () {
+      this.$store.commit('setThemeTopNavbarFixed')
+    },
+    sidebarShowSwitch () {
+      this.$store.commit('setThemeShowSider')
+    }
   },
   computed: {
+    ...mapGetters(['themeShowSider', 'themeOpenSider']),
     topNavbarBoxClass () {
       return this.fixed ? 'top-navbar-box-fixed' : ''
     },
@@ -52,7 +71,7 @@ export default {
     width: 100%;
     background-color: red;
     padding: 0 10px;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px #f0f1f2;
   }
 
   .top-navbar-box-fixed {
@@ -68,6 +87,26 @@ export default {
 
   #top-navbar-content {
     flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .sidebar-open-control-button {
+    margin-right: 20px;
+    font-size: 20px;
+    padding: 5px;
+    cursor: pointer;
+    transition: .4s ease;
+    color: black;
+  }
+
+  .sidebar-open-control-button:hover {
+    color: green;
+  }
+
+  .sidebar-open-control-button:active {
+    color: red;
   }
 
 </style>

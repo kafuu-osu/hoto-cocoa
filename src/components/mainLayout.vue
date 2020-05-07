@@ -3,9 +3,16 @@
     <div id="main-layout-box">
       <top-navbar
         ref="topNavbar"
-        :fixed="true"
+        :fixed="fixed"
       />
-      <router-view :style="routerViewStyle" />
+      <div
+        :style="routerViewStyle"
+        id="main-content-box"
+      >
+        <div id="view-box">
+          <router-view />
+        </div>
+      </div>
       <footer-layout ref="footerLayout" />
     </div>
   </div>
@@ -16,6 +23,12 @@ import topNavbar from '@/components/topNavbar'
 import footerLayout from '@/components/footerLayout'
 
 export default {
+  props: {
+    fixed: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     topNavbar,
     footerLayout
@@ -46,6 +59,16 @@ export default {
 <style scoped>
 #main-layout-box {
   flex: 1;
+  min-height: 100%;
+}
+
+#main-content-box {
+  padding: 20px;
+}
+
+#view-box {
+  background-color: gainsboro;
   height: 100%;
+  padding: 20px;
 }
 </style>

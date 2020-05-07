@@ -1,8 +1,24 @@
 <template>
   <div id="app">
     <div id="main">
-      <sider-layout :fixed="true" />
-      <main-layout class="main-layout" />
+      <sider-layout
+        :fixed="themeSiderFixed"
+        :show="themeShowSider"
+        :open="themeOpenSider"
+        :mini="miniScreen"
+      />
+      <div class="main-layout">
+        <div
+          class="main-layout-mask"
+          ref="mainLayoutMask"
+          @click.stop="sidebarOpenSwitch"
+          @transitionend="handleHiddenMask"
+          :style="showMask ? 'display: block; background-color: rgb(0, 0, 0,.5);' : 'background-color: rgb(0, 0, 0, 0);'"
+        />
+        <main-layout
+          :fixed="themeTopNavbarFixed"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -10,21 +26,95 @@
 <script>
 import mainLayout from '@/components/mainLayout'
 import siderLayout from '@/components/siderLayout'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     mainLayout,
     siderLayout
+  },
+  computed: {
+    ...mapGetters(['themeSiderFixed', 'themeOpenSider', 'themeTopNavbarFixed', 'themeShowSider']),
+    showMask () {
+      return this.miniScreen && this.themeOpenSider
+    },
+    miniScreen () {
+      return this.screenWidth <= 900
+    }
+  },
+  data () {
+    return {
+      screenWidth: document.body.clientWidth,
+      watingRefresh: false
+    }
+  },
+  mounted () {
+    const that = this
+    if (this.miniScreen) this.$store.commit('setThemeOpenSider', false)
+    window.onresize = () => {
+      return (() => {
+        window.screenWidth = document.body.clientWidth
+        that.screenWidth = window.screenWidth
+      })()
+    }
+  },
+  watch: {
+    screenWidth (val) {
+      if (!this.watingRefresh) {
+        this.screenWidth = val
+        if (this.showMask) this.$store.commit('setThemeOpenSider', false)
+
+        this.watingRefresh = true
+        setTimeout(() => {
+          this.watingRefresh = false
+        }, 400)
+      }
+    }
+  },
+  methods: {
+    sidebarOpenSwitch () {
+      this.$store.commit('setThemeOpenSider', false)
+    },
+    handleHiddenMask () {
+      if (!this.showMask) this.$refs.mainLayoutMask.style.display = 'none'
+    }
   }
 
 }
 </script>
 
 <style>
- html,body{
-    height: 100%;
-    margin: 0;
-    padding: 0;
+html,body{
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 150px;
+  background: #898989;
+}
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 150px;
+  background: #4A4A4A;
+}
+::-webkit-scrollbar-track {
+  border-radius: 150px;
+  background: #ccc;
+}
+
+.ant-popover-arrow {
+  display: none !important;
+}
+.ant-popover-inner-content {
+  padding: 0 0 !important;
+}
+.ant-tooltip-arrow {
+  display: none !important;
 }
 </style>
 
@@ -35,16 +125,27 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  height: 100%;
+  min-height: 100%;
 }
 
 #main {
   display: flex;
-  height: 100%;
+  min-height: 100%;
 }
 
 .main-layout {
   flex: 1;
+  transition: .4s ease;
+  height: 100%;
 }
 
+.main-layout-mask {
+  background-color: rgb(0, 0, 0, 0);
+  position: fixed;
+  z-index: 6;
+  width: 100%;
+  height: 100%;
+  transition: .4s ease;
+  cursor: pointer;
+}
 </style>
