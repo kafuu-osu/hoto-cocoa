@@ -22,11 +22,11 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: #424242;
+  background-color: #a0a0a0;
   justify-content: center;
   color: #FAFAFA;
   padding: 20px;
-  min-height: 140px;
+  height: 60px;
 }
 
 </style>

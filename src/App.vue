@@ -10,10 +10,8 @@
       <div class="main-layout">
         <div
           class="main-layout-mask"
-          ref="mainLayoutMask"
           @click.stop="sidebarOpenSwitch"
-          @transitionend="handleHiddenMask"
-          :style="showMask ? 'display: block; background-color: rgb(0, 0, 0,.5);' : 'background-color: rgb(0, 0, 0, 0);'"
+          :style="showMask ? 'display: block; background-color: rgb(0, 0, 0,.5);' : 'display: none; background-color: rgb(0, 0, 0, 0);'"
         />
         <main-layout
           :fixed="themeTopNavbarFixed"
@@ -74,9 +72,6 @@ export default {
   methods: {
     sidebarOpenSwitch () {
       this.$store.commit('setThemeOpenSider', false)
-    },
-    handleHiddenMask () {
-      if (!this.showMask) this.$refs.mainLayoutMask.style.display = 'none'
     }
   }
 
@@ -116,9 +111,6 @@ html,body{
 .ant-tooltip-arrow {
   display: none !important;
 }
-</style>
-
-<style scoped>
 
 #app {
   font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif;

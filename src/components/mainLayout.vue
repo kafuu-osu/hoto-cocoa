@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     routerViewStyle () {
-      return `height: calc(100% - ${this.footerLayoutHeight}px - ${this.topNavbarHeight}px);`
+      return `height: calc(100vh - ${this.footerLayoutHeight}px - ${this.topNavbarHeight}px) !important;`
     },
     footerLayoutHeight () {
       return this.isMounted ? this.$refs.footerLayout.$refs.footerLayoutBox.clientHeight : '0'
@@ -59,7 +59,7 @@ export default {
 <style scoped>
 #main-layout-box {
   flex: 1;
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 #main-content-box {
@@ -70,5 +70,6 @@ export default {
   background-color: gainsboro;
   height: 100%;
   padding: 20px;
+  margin: 0 auto;
 }
 </style>

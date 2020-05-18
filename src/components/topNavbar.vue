@@ -34,7 +34,7 @@ export default {
     },
     height: {
       type: Number,
-      default: 70
+      default: 60
     }
   },
   methods: {
@@ -71,7 +71,7 @@ export default {
     width: 100%;
     background-color: #FAFAFA;
     padding: 0 10px;
-    box-shadow: 0 2px 4px rgba(223, 223, 223, .5);
+    box-shadow: 0 2px 3px -1px rgba(223, 223, 223, .5);
   }
 
   .top-navbar-box-fixed {
@@ -94,7 +94,7 @@ export default {
 
   .sidebar-open-control-button {
     margin-right: 20px;
-    font-size: 20px;
+    font-size: 18px;
     padding: 5px;
     cursor: pointer;
     transition: .4s ease;

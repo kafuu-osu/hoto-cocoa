@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div>测试</div>
-    <div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div><div>测试</div>
+    osuKafuu for deranker!
   </div>
 </template>
 <script>

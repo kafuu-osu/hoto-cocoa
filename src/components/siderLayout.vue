@@ -16,7 +16,7 @@
             <div id="logo-box-content">
               <div>
                 <img
-                  style="height: 40px; margin: 0 4px;"
+                  style="height: 50px; margin: 0 4px;"
                   src="@/assets/biglogo_min.png"
                 >
               </div>
@@ -28,8 +28,19 @@
               </div>
             </div>
           </div>
-          <div>
-            zzz
+          <div id="sider-menu-box">
+            <div class="sider-menu-item">
+              排名
+            </div>
+            <div class="sider-menu-item">
+              Wiki
+            </div>
+            <div class="sider-menu-item">
+              图池
+            </div>
+            <div class="sider-menu-item">
+              赛季
+            </div>
           </div>
         </div>
       </div>
@@ -65,7 +76,7 @@ export default {
       return `width: ${this.boxWidth}px; opacity: ${this.boxOpacity};`
     },
     boxWidth () {
-      return this.open ? 220 : this.mini ? 0 : 70
+      return this.open ? 210 : this.mini ? 0 : 70
     },
     boxOpacity () {
       return this.open ? 1 : this.mini ? 0.8 : 1
@@ -87,7 +98,7 @@ export default {
   background-color: #fafafa;
   transition: .4s ease;
   overflow: hidden;
-  box-shadow: 2px 0 4px rgba(223, 223, 223, .5);
+  box-shadow: 2px 0 3px -1px rgba(0, 0, 0, .1);
 }
 
 .sider-layout-box-fixed {
@@ -103,13 +114,12 @@ export default {
 }
 
 #sider-layout-placeholder {
-    height: 100%;
-    transition: .4s ease;
+  height: 100%;
+  transition: .4s ease;
 }
 
 #sider-layout-content {
   width: 100%;
-  padding: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -118,14 +128,43 @@ export default {
 
 #logo-box {
   width: 100%;
-  height: 50px;
+  height: 60px;
+  box-shadow: 0px 2px 3px -1px rgba(223, 223, 223, .2);
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 20px;
   user-select: none;
   overflow: hidden;
   display: flex;
   justify-content: center;
+}
+
+#sider-menu-box {
+  width: 100%;
+  flex: 1;
+  padding: 10px 0;
+  font-size: 14px;
+  user-select: none;
+  overflow: hidden;
+  text-align: center;
+}
+
+.sider-menu-item {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  transition: .4s ease;
+  cursor: pointer;
+}
+
+.sider-menu-item:hover {
+  background-color: green;
+}
+
+.sider-menu-item:active {
+  background-color: blue;
 }
 
 #logo-box-content {
