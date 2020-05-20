@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    isMobile: false,
+    pageWidth: 1024,
     themeConfig: {
       showSider: true,
       openSider: true,
@@ -18,7 +20,9 @@ export default new Vuex.Store({
     themeOpenSider: state => state.themeConfig.openSider,
     themeSiderFixed: state => state.themeConfig.siderFixed,
     themeTopNavbarFixed: state => state.themeConfig.topNavbarFixed,
-    themeSiderWidth: state => state.themeConfig.siderWidth
+    themeSiderWidth: state => state.themeConfig.siderWidth,
+    pageWidth: state => state.pageWidth,
+    isMobile: state => state.isMobile
   },
   mutations: {
     setThemeShowSider (state, setting) {
@@ -34,7 +38,13 @@ export default new Vuex.Store({
       Vue.set(state.themeConfig, 'topNavbarFixed', setting || !state.themeConfig.topNavbarFixed)
     },
     setThemeSiderWidth (state, setting) {
-      Vue.set(state.themeConfig, 'siderWidth', setting || 210)
+      Vue.set(state.themeConfig, 'siderWidth', setting)
+    },
+    setPageWidth (state, setting) {
+      Vue.set(state, 'pageWidth', setting)
+    },
+    setIsMobile (state, setting) {
+      Vue.set(state, 'isMobile', setting)
     }
   },
   actions: {

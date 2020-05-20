@@ -10,7 +10,12 @@
         id="main-content-box"
       >
         <div id="view-box">
-          <router-view />
+          <transition
+            name="faded"
+            mode="out-in"
+          >
+            <router-view />
+          </transition>
         </div>
       </div>
       <footer-layout ref="footerLayout" />
@@ -71,5 +76,26 @@ export default {
   height: 100%;
   padding: 20px;
   margin: 0 auto;
+}
+
+.faded-enter {
+  opacity: 0;
+}
+.faded-enter-active {
+  transition: .5s ease-in-out;
+
+}
+.faded-enter-to {
+
+}
+.faded-leave {
+
+}
+.faded-leave-active {
+  transition: .5s ease-in-out;
+}
+.faded-leave-to {
+  opacity: 0;
+  transform: translate(20px, 0);
 }
 </style>

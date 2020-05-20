@@ -29,17 +29,13 @@
             </div>
           </div>
           <div id="sider-menu-box">
-            <div class="sider-menu-item">
-              排名
-            </div>
-            <div class="sider-menu-item">
-              Wiki
-            </div>
-            <div class="sider-menu-item">
-              图池
-            </div>
-            <div class="sider-menu-item">
-              赛季
+            <div
+              v-for="(item, idx) in menus"
+              :key="idx"
+              class="sider-menu-item"
+              @click="jumpTo(item.name)"
+            >
+              {{ item.title }}
             </div>
           </div>
         </div>
@@ -49,6 +45,8 @@
 </template>
 
 <script>
+import pages from '@/router/pages'
+
 export default {
   props: {
     fixed: {
@@ -68,6 +66,16 @@ export default {
       default: false
     }
   },
+  data () {
+    return {
+      menus: pages.filter(item => item.show === true)
+    }
+  },
+  methods: {
+    jumpTo (name) {
+      this.$router.push({ name: name })
+    }
+  },
   computed: {
     siderLayoutBoxClass () {
       return this.fixed ? 'sider-layout-box-fixed' : 'sider-layout-box-common'
@@ -76,8 +84,8 @@ export default {
       return `width: ${this.boxWidth}px; opacity: ${this.boxOpacity};`
     },
     boxWidth () {
-      const width = this.open ? 210 : this.mini ? 0 : 70
-      this.$store.commit('setThemeSiderWidth', width)
+      const width = (this.open ? 210 : this.mini ? 0 : 70)
+      this.$store.commit('setThemeSiderWidth', this.mini ? 0 : width)
       return width
     },
     boxOpacity () {
@@ -159,6 +167,7 @@ export default {
   align-items: center;
   transition: .4s ease;
   cursor: pointer;
+  min-width: 70px;
 }
 
 .sider-menu-item:hover {

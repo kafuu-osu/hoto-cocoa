@@ -47,6 +47,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.commit('setIsMobile', this.isMobile())
     const that = this
     if (this.miniScreen) this.$store.commit('setThemeOpenSider', false)
     window.onresize = () => {
@@ -61,6 +62,7 @@ export default {
       if (this.showMask) this.$store.commit('setThemeOpenSider', false)
       if (!this.watingRefresh) {
         this.screenWidth = val
+        this.$store.commit('setPageWidth', val)
 
         this.watingRefresh = true
         setTimeout(() => {
@@ -72,6 +74,11 @@ export default {
   methods: {
     sidebarOpenSwitch () {
       this.$store.commit('setThemeOpenSider', false)
+    },
+    isMobile () {
+      return navigator.userAgent.match(
+        /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+      )
     }
   }
 
@@ -83,6 +90,12 @@ html,body{
   min-height: 100%;
   margin: 0;
   padding: 0;
+}
+
+input{
+  background:none;
+  outline:none;
+  border:none;
 }
 
 ::-webkit-scrollbar {
