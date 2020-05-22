@@ -9,7 +9,7 @@ export default new Vuex.Store({
     pageWidth: 1024,
     themeConfig: {
       showSider: true,
-      openSider: true,
+      openSider: false,
       siderFixed: true,
       topNavbarFixed: true,
       siderWidth: 210
@@ -26,16 +26,16 @@ export default new Vuex.Store({
   },
   mutations: {
     setThemeShowSider (state, setting) {
-      Vue.set(state.themeConfig, 'showSider', setting || !state.themeConfig.showSider)
+      Vue.set(state.themeConfig, 'showSider', typeof (setting) === 'boolean' ? setting : !state.themeConfig.showSider)
     },
     setThemeOpenSider (state, setting) {
-      Vue.set(state.themeConfig, 'openSider', setting || !state.themeConfig.openSider)
+      Vue.set(state.themeConfig, 'openSider', typeof (setting) === 'boolean' ? setting : !state.themeConfig.openSider)
     },
     setThemeSiderFixed (state, setting) {
-      Vue.set(state.themeConfig, 'siderFixed', setting || !state.themeConfig.siderFixed)
+      Vue.set(state.themeConfig, 'siderFixed', typeof (setting) === 'boolean' ? setting : !state.themeConfig.siderFixed)
     },
     setThemeTopNavbarFixed (state, setting) {
-      Vue.set(state.themeConfig, 'topNavbarFixed', setting || !state.themeConfig.topNavbarFixed)
+      Vue.set(state.themeConfig, 'topNavbarFixed', typeof (setting) === 'boolean' ? setting : !state.themeConfig.topNavbarFixed)
     },
     setThemeSiderWidth (state, setting) {
       Vue.set(state.themeConfig, 'siderWidth', setting)
