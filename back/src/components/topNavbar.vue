@@ -19,32 +19,70 @@
           <a-icon :type="themeOpenSider ? 'menu-fold' : 'menu-unfold'" />
         </div>
         <div
-          class="switcher-button"
-          style="margin-right: auto;"
+          v-if="!miniSizePage"
+          id="top-navbar-menu"
         >
-          说明
+          <div
+            class="outline-button"
+            style="margin-right: auto;"
+          >
+            介绍
+          </div>
+          <div
+            class="search-box"
+            :style="openSearchBox ? 'width: 180px;' : 'width: 30px;'"
+          >
+            <a-icon
+              type="search"
+              class="search-button"
+              @click="handleSearch"
+            />
+            <input
+              type="text"
+              class="search-input"
+              placeholder="寻找玩家..."
+            >
+          </div>
+
+          <div class="outline-button">
+            切换器
+          </div>
+          <div class="primary-button">
+            注册 / 登录
+          </div>
         </div>
         <div
-          class="search-box"
-          :style="openSearchBox ? 'width: 180px;' : 'width: 30px;'"
+          v-else
+          id="top-navbar-menu"
         >
-          <a-icon
-            type="search"
-            class="search-button"
-            @click="handleSearch"
-          />
-          <input
-            type="text"
-            class="search-input"
-            placeholder="寻找玩家..."
+          <div
+            class="outline-button"
+            style="margin-left: auto; font-size: 18px;"
+            @click="openTopNavbarMenu"
           >
-        </div>
-
-        <div class="switcher-button">
-          切换器
-        </div>
-        <div class="login-button">
-          sign in
+            <a-icon type="bars" />
+          </div>
+          <div
+            v-show="openTopNavbarFixedMenu"
+            id="top-navbar-fixed-menu"
+            :style="`top: ${height + 1}px;`"
+          >
+            <div class="top-navbar-fixed-menu-item">
+              注册 / 登录
+            </div>
+            <div class="top-navbar-fixed-menu-item">
+              切换器
+            </div>
+            <div class="top-navbar-fixed-menu-item">
+              介绍
+            </div>
+          </div>
+          <div
+            @click="openTopNavbarFixedMenu = false"
+            v-show="openTopNavbarFixedMenu"
+            class="top-navbar-fixed-menu-mask"
+            :style="`top: ${height + 1}px; height: calc(100vh - ${height + 1}px);`"
+          />
         </div>
       </div>
     </div>
@@ -67,13 +105,15 @@ export default {
   },
   data () {
     return {
-      openSearchBox: true
+      openSearchBox: true,
+      openTopNavbarFixedMenu: false
     }
   },
   watch: {
     miniSizePage: {
       handler: function (val) {
         this.openSearchBox = !val
+        this.openTopNavbarFixedMenu = false
       }
     }
   },
@@ -91,11 +131,10 @@ export default {
       this.$store.commit('setThemeShowSider')
     },
     handleSearch () {
-      if (this.openSearchBox) {
 
-      } else {
-
-      }
+    },
+    openTopNavbarMenu () {
+      this.openTopNavbarFixedMenu = !this.openTopNavbarFixedMenu
     }
   },
   computed: {
@@ -107,7 +146,7 @@ export default {
       return `height: ${this.height}px; `
     },
     miniSizePage () {
-      const mini = (this.pageWidth < 600) || this.isMobile
+      const mini = (this.pageWidth < 700) || this.isMobile
       return mini
     }
   }
@@ -146,51 +185,51 @@ export default {
     transition: .4s ease;
   }
 
-  .switcher-button {
+  .outline-button {
     border: 1px solid orange;
-    padding: 8px 12px;
+    padding: 8px 14px;
     border-radius: 4px;
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
     user-select: none;
-    transition: .4s ease;
+    transition: background-color filter .4s ease;
     margin: 0 6px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .switcher-button:hover {
+  .outline-button:hover {
     background-color:rgba(0, 0, 0, .015);
     filter: brightness(1.1) opacity(.9);
   }
 
-  .switcher-button:active {
+  .outline-button:active {
     background-color:rgba(0, 0, 0, .1);
     filter: brightness(.9);
   }
 
-  .login-button {
+  .primary-button {
     background-color: orange;
-    padding: 8px 12px;
+    padding: 8px 14px;
     border-radius: 4px;
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
     user-select: none;
-    transition: .4s ease;
+    transition: filter .4s ease;
     margin: 0 6px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .login-button:hover {
+  .primary-button:hover {
     filter: brightness(1.1);
   }
 
-  .login-button:active {
+  .primary-button:active {
     filter: brightness(.9);
   }
 
@@ -200,7 +239,6 @@ export default {
     background-color: #FAFAFA;
     padding: 0 10px;
     box-shadow: 0 2px 3px -1px rgba(223, 223, 223, .5);
-    transition: .2s ease;
     width: 100%;
   }
 
@@ -212,7 +250,44 @@ export default {
   .top-navbar-box-fixed {
     position: fixed;
     top: 0;
-    z-index: 5;
+    z-index: 50;
+  }
+
+  .top-navbar-fixed-menu-item {
+    padding: 10px;
+    transition: .2s ease;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .top-navbar-fixed-menu-item:hover {
+    filter: brightness(1.1);
+  }
+
+  .top-navbar-fixed-menu-item:active {
+    filter: brightness(.9);
+  }
+
+  #top-navbar-fixed-menu {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    background-color: #FAFAFA;
+    transition: .4s ease;
+    padding: 10px;
+    z-index: 15;
+    border-bottom: 1px solid rgba(0, 0, 0, .02);
+    box-shadow: 0 2px 3px -1px rgba(223, 223, 223, .5);
+  }
+
+  .top-navbar-fixed-menu-mask {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+    user-select: none;
+    cursor: pointer;
+    z-index: 10;
   }
 
   #top-navbar-placeholder {
@@ -225,6 +300,12 @@ export default {
     display: flex;
     align-items: center;
     padding: 10px;
+  }
+
+  #top-navbar-menu {
+    flex: 1;
+    display: flex;
+    align-items: center;
   }
 
   .sidebar-open-control-button {

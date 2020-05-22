@@ -1,4 +1,5 @@
 import Home from '../views/Home.vue'
+import Ranking from '../views/Ranking.vue'
 
 export default [
   {
@@ -7,6 +8,13 @@ export default [
     title: '主页',
     show: true,
     component: Home
+  },
+  {
+    path: '/Ranking',
+    name: 'Ranking',
+    title: '排行',
+    show: true,
+    component: Ranking
   },
   {
     path: '/about',

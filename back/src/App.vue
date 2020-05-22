@@ -48,8 +48,10 @@ export default {
   },
   mounted () {
     this.$store.commit('setIsMobile', this.isMobile())
-    const that = this
     if (this.miniScreen) this.$store.commit('setThemeOpenSider', false)
+    const that = this
+    window.screenWidth = document.body.clientWidth
+    that.screenWidth = window.screenWidth
     window.onresize = () => {
       return (() => {
         window.screenWidth = document.body.clientWidth
@@ -67,7 +69,7 @@ export default {
         this.watingRefresh = true
         setTimeout(() => {
           this.watingRefresh = false
-        }, 400)
+        }, 200)
       }
     }
   },

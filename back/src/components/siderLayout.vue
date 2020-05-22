@@ -81,15 +81,12 @@ export default {
       return this.fixed ? 'sider-layout-box-fixed' : 'sider-layout-box-common'
     },
     siderLayoutWidth () {
-      return `width: ${this.boxWidth}px; opacity: ${this.boxOpacity};`
+      return `width: ${this.boxWidth}px;`
     },
     boxWidth () {
       const width = (this.open ? 210 : this.mini ? 0 : 70)
       this.$store.commit('setThemeSiderWidth', this.mini ? 0 : width)
       return width
-    },
-    boxOpacity () {
-      return this.open ? 1 : this.mini ? 0.8 : 1
     },
     logoTextStyle () {
       return this.open ? 'opacity: 1; width: 90px;' : 'opacity: 0; width: 0;'
