@@ -249,8 +249,9 @@ export default {
   }
 
   .outline-button {
-    border: 1px solid #FAFAFA;
-    padding: 8px 20px;
+    box-sizing: border-box;
+    border: 2px solid #C5CAE9;
+    padding: 7px 20px;
     border-radius: 4px;
     font-size: 12px;
     font-weight: bold;

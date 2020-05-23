@@ -48,10 +48,10 @@ export default {
   },
   computed: {
     routerViewStyle () {
-      return `min-height: calc(100vh - ${this.footerLayoutHeight}px - ${this.topNavbarHeight}px) !important;`
+      return `min-height: calc(100vh - ${this.topNavbarHeight}px) !important;`
     },
     footerLayoutHeight () {
-      return this.isMounted ? this.$refs.footerLayout.$refs.footerLayoutBox.clientHeight : '0'
+      return this.isMounted ? this.$refs.footerLayout.$refs.footerLayoutBox.clientHeight + 1 : '0'
     },
     topNavbarHeight () {
       return this.isMounted ? this.$refs.topNavbar.$refs.topNavbarBox.clientHeight : '0'
