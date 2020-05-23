@@ -22,7 +22,7 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: #a0a0a0;
+  background-color: #141414;
   justify-content: center;
   color: #FAFAFA;
   padding: 20px;

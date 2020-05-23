@@ -1,5 +1,5 @@
 <template>
-  <div class="top-navbar-must">
+  <div>
     <div
       v-if="fixed"
       id="top-navbar-placeholder"
@@ -23,12 +23,24 @@
           id="top-navbar-menu"
         >
           <div
-            class="outline-button"
-            style="margin-right: auto;"
+            v-if="themeTopNavbarFixed"
+            class="logo-box"
           >
-            介绍
+            <div
+              class="logo-box-content"
+            >
+              <div>
+                <img
+                  style="height: 50px; margin: 0 4px;"
+                  src="@/assets/biglogo_min.png"
+                >
+              </div>
+              <div style="transition: .2s ease; text-align: center; width: 90px;">
+                osu!Kafuu
+              </div>
+            </div>
           </div>
-          <div
+          <!--div
             class="search-box"
             :style="openSearchBox ? 'width: 180px;' : 'width: 30px;'"
           >
@@ -42,13 +54,20 @@
               class="search-input"
               placeholder="寻找玩家..."
             >
-          </div>
+          </div-->
 
-          <div class="outline-button">
+          <div
+            style="margin-left: auto;"
+            @click="jumpTo('Switcher')"
+            class="outline-button"
+          >
             切换器
           </div>
-          <div class="primary-button">
-            注册 / 登录
+          <div
+            @click="jumpTo('Login')"
+            class="primary-button"
+          >
+            sign in~
           </div>
         </div>
         <div
@@ -67,13 +86,22 @@
             id="top-navbar-fixed-menu"
             :style="`top: ${height + 1}px;`"
           >
-            <div class="top-navbar-fixed-menu-item">
+            <div
+              @click="jumpTo('Login')"
+              class="top-navbar-fixed-menu-item"
+            >
               注册 / 登录
             </div>
-            <div class="top-navbar-fixed-menu-item">
+            <div
+              @click="jumpTo('Switcher')"
+              class="top-navbar-fixed-menu-item"
+            >
               切换器
             </div>
-            <div class="top-navbar-fixed-menu-item">
+            <div
+              @click="jumpTo('Introduce')"
+              class="top-navbar-fixed-menu-item"
+            >
               介绍
             </div>
           </div>
@@ -100,7 +128,7 @@ export default {
     },
     height: {
       type: Number,
-      default: 60
+      default: 75
     }
   },
   data () {
@@ -118,6 +146,10 @@ export default {
     }
   },
   methods: {
+    jumpTo (name) {
+      this.$router.push({ name: name })
+      this.$store.commit('setThemeOpenSider', false)
+    },
     sidebarOpenSwitch () {
       this.$store.commit('setThemeOpenSider')
     },
@@ -138,7 +170,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['themeOpenSider', 'pageWidth', 'isMobile']),
+    ...mapGetters(['themeOpenSider', 'pageWidth', 'isMobile', 'themeTopNavbarFixed']),
     topNavbarBoxClass () {
       return this.fixed ? 'top-navbar-box-fixed' : ''
     },
@@ -154,6 +186,24 @@ export default {
 </script>
 
 <style soped lang="less">
+  .logo-box {
+    height: 75px;
+    /*box-shadow: 0px 2px 3px -1px rgba(223, 223, 223, .2);*/
+    font-size: 16px;
+    font-weight: bold;
+    user-select: none;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #3949AB;
+  }
+
+  .logo-box-content {
+    display: flex;
+    align-items: center;
+  }
+
   .search-button {
     cursor: pointer;
     user-select: none;
@@ -175,7 +225,7 @@ export default {
   }
 
   .search-box {
-    background-color: #FFFFFF;
+    background-color: #141414;
     padding: 6px 8px;
     border-radius: 4px;
     margin: 0 6px;
@@ -183,6 +233,7 @@ export default {
     white-space:nowrap;
     width: 180px;
     transition: .4s ease;
+    border: 1px solid #FAFAFA;
   }
 
   .outline-button {
@@ -193,7 +244,7 @@ export default {
     font-weight: bold;
     cursor: pointer;
     user-select: none;
-    transition: background-color filter .4s ease;
+    transition: .4s ease;
     margin: 0 6px;
     display: flex;
     align-items: center;
@@ -218,7 +269,7 @@ export default {
     font-weight: bold;
     cursor: pointer;
     user-select: none;
-    transition: filter .4s ease;
+    transition: .4s ease;
     margin: 0 6px;
     display: flex;
     align-items: center;
@@ -236,28 +287,27 @@ export default {
   #top-navbar-box {
     display: flex;
     align-items: center;
-    background-color: #FAFAFA;
+    background-color: #3949AB;
     padding: 0 10px;
-    box-shadow: 0 2px 3px -1px rgba(223, 223, 223, .5);
+    /*box-shadow: 0 2px 3px -1px rgba(223, 223, 223, .5);*/
     width: 100%;
-  }
-
-  .top-navbar-must {
-    position: relative;
-    transform: scale3d(1, 1, 1);
   }
 
   .top-navbar-box-fixed {
     position: fixed;
     top: 0;
+    left: 0;
     z-index: 50;
   }
 
   .top-navbar-fixed-menu-item {
-    padding: 10px;
+    padding: 14px;
     transition: .2s ease;
+    border-radius: 4px;
     user-select: none;
     cursor: pointer;
+    background-color: rgba(0, 0, 0, .015);
+    margin: 10px 0;
   }
 
   .top-navbar-fixed-menu-item:hover {
@@ -272,7 +322,7 @@ export default {
     position: absolute;
     width: 100%;
     left: 0;
-    background-color: #FAFAFA;
+    background-color: #141414;
     transition: .4s ease;
     padding: 10px;
     z-index: 15;
@@ -306,6 +356,7 @@ export default {
     flex: 1;
     display: flex;
     align-items: center;
+    padding: 0 15px;
   }
 
   .sidebar-open-control-button {
@@ -314,7 +365,7 @@ export default {
     padding: 5px;
     cursor: pointer;
     transition: .4s ease;
-    color: black;
+    color: #FAFAFA;
     user-select: none;
   }
 

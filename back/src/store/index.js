@@ -11,7 +11,7 @@ export default new Vuex.Store({
       showSider: true,
       openSider: false,
       siderFixed: true,
-      topNavbarFixed: true,
+      topNavbarFixed: false,
       siderWidth: 210
     }
   },

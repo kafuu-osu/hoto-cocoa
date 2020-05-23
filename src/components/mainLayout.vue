@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     routerViewStyle () {
-      return `height: calc(100vh - ${this.footerLayoutHeight}px - ${this.topNavbarHeight}px) !important;`
+      return `min-height: calc(100vh - ${this.footerLayoutHeight}px - ${this.topNavbarHeight}px) !important;`
     },
     footerLayoutHeight () {
       return this.isMounted ? this.$refs.footerLayout.$refs.footerLayoutBox.clientHeight : '0'
@@ -65,6 +65,7 @@ export default {
 #main-layout-box {
   flex: 1;
   min-height: 100vh;
+  background-color: #000000;
 }
 
 #main-content-box {
@@ -72,8 +73,8 @@ export default {
 }
 
 #view-box {
-  background-color: gainsboro;
-  height: 100%;
+  background-color: #141414;
+  min-height: 100%;
   padding: 20px;
   margin: 0 auto;
 }

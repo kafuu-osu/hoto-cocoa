@@ -13,7 +13,10 @@
       >
         <div id="sider-layout-content">
           <div id="logo-box">
-            <div id="logo-box-content">
+            <div
+              v-if="!themeTopNavbarFixed"
+              id="logo-box-content"
+            >
               <div>
                 <img
                   style="height: 50px; margin: 0 4px;"
@@ -35,7 +38,16 @@
               class="sider-menu-item"
               @click="jumpTo(item.name)"
             >
-              {{ item.title }}
+              <a-icon
+                style="font-size: 20px;"
+                v-if="item.icon"
+                :type="item.icon"
+              /><div
+                style="white-space: nowrap; padding: 0 15px; font-size: 14px;"
+                v-show="open"
+              >
+                {{ item.title }}
+              </div>
             </div>
           </div>
         </div>
@@ -46,6 +58,7 @@
 
 <script>
 import pages from '@/router/pages'
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -74,9 +87,11 @@ export default {
   methods: {
     jumpTo (name) {
       this.$router.push({ name: name })
+      if (this.mini) this.$store.commit('setThemeOpenSider', false)
     }
   },
   computed: {
+    ...mapGetters(['themeTopNavbarFixed']),
     siderLayoutBoxClass () {
       return this.fixed ? 'sider-layout-box-fixed' : 'sider-layout-box-common'
     },
@@ -84,7 +99,7 @@ export default {
       return `width: ${this.boxWidth}px;`
     },
     boxWidth () {
-      const width = (this.open ? 210 : this.mini ? 0 : 70)
+      const width = (this.open ? 210 : this.mini ? 0 : 80)
       this.$store.commit('setThemeSiderWidth', this.mini ? 0 : width)
       return width
     },
@@ -102,10 +117,9 @@ export default {
   display: flex;
   justify-content: center;
   height: 100%;
-  background-color: #fafafa;
+  background-color: #141414;
   transition: .4s ease;
   overflow: hidden;
-  box-shadow: 2px 0 3px -1px rgba(0, 0, 0, .1);
 }
 
 .sider-layout-box-fixed {
@@ -135,8 +149,8 @@ export default {
 
 #logo-box {
   width: 100%;
-  height: 60px;
-  box-shadow: 0px 2px 3px -1px rgba(223, 223, 223, .2);
+  height: 75px;
+  /*box-shadow: 0px 2px 3px -1px rgba(223, 223, 223, .2);*/
   font-size: 16px;
   font-weight: bold;
   user-select: none;
@@ -144,6 +158,7 @@ export default {
   display: flex;
   justify-content: center;
   cursor: pointer;
+  background-color: #3949AB;
 }
 
 #sider-menu-box {
@@ -168,11 +183,11 @@ export default {
 }
 
 .sider-menu-item:hover {
-  background-color: green;
+  filter: brightness(1.1);
 }
 
 .sider-menu-item:active {
-  background-color: blue;
+  filter: brightness(0.9);
 }
 
 #logo-box-content {
