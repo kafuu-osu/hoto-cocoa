@@ -156,7 +156,7 @@ export default {
   methods: {
     jumpTo (name) {
       this.$router.push({ name: name })
-      this.$store.commit('setThemeOpenSider', false)
+      if (this.openTopNavbarFixedMenu) this.openTopNavbarFixedMenu = false
     },
     sidebarOpenSwitch () {
       this.$store.commit('setThemeOpenSider')
