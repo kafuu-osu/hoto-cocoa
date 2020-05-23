@@ -13,7 +13,30 @@
     >
       <div id="top-navbar-content">
         <div
+          v-if="themeTopNavbarFixed"
+          class="logo-box"
+          :style="themeOpenSider ? 'width: 210px;' : 'width: 80px;'"
+        >
+          <div
+            class="logo-box-content"
+          >
+            <div>
+              <img
+                style="height: 50px; margin: 0 4px;"
+                src="@/assets/biglogo_min.png"
+              >
+            </div>
+            <div
+              style="transition: .2s ease; text-align: center;"
+              :style="logoTextStyle"
+            >
+              osu!Kafuu
+            </div>
+          </div>
+        </div>
+        <div
           class="sidebar-open-control-button"
+          :style="miniSizePage ? 'margin-left: 0px;' : 'margin-left: 25px;'"
           @click="sidebarOpenSwitch"
         >
           <a-icon :type="themeOpenSider ? 'menu-fold' : 'menu-unfold'" />
@@ -22,24 +45,6 @@
           v-if="!miniSizePage"
           id="top-navbar-menu"
         >
-          <div
-            v-if="themeTopNavbarFixed"
-            class="logo-box"
-          >
-            <div
-              class="logo-box-content"
-            >
-              <div>
-                <img
-                  style="height: 50px; margin: 0 4px;"
-                  src="@/assets/biglogo_min.png"
-                >
-              </div>
-              <div style="transition: .2s ease; text-align: center; width: 90px;">
-                osu!Kafuu
-              </div>
-            </div>
-          </div>
           <!--div
             class="search-box"
             :style="openSearchBox ? 'width: 180px;' : 'width: 30px;'"
@@ -75,16 +80,19 @@
           id="top-navbar-menu"
         >
           <div
-            class="outline-button"
+            class="primary-button"
             style="margin-left: auto; font-size: 18px;"
             @click="openTopNavbarMenu"
           >
-            <a-icon type="bars" />
+            <a-icon
+              style="color: #FFFFFF;"
+              type="bars"
+            />
           </div>
           <div
             v-show="openTopNavbarFixedMenu"
             id="top-navbar-fixed-menu"
-            :style="`top: ${height + 1}px;`"
+            :style="`top: ${height}px;`"
           >
             <div
               @click="jumpTo('Login')"
@@ -109,7 +117,7 @@
             @click="openTopNavbarFixedMenu = false"
             v-show="openTopNavbarFixedMenu"
             class="top-navbar-fixed-menu-mask"
-            :style="`top: ${height + 1}px; height: calc(100vh - ${height + 1}px);`"
+            :style="`top: ${height}px; height: calc(100vh - ${height}px);`"
           />
         </div>
       </div>
@@ -180,6 +188,9 @@ export default {
     miniSizePage () {
       const mini = (this.pageWidth < 700) || this.isMobile
       return mini
+    },
+    logoTextStyle () {
+      return this.themeOpenSider ? 'opacity: 1; width: 90px;' : 'opacity: 0; width: 0;'
     }
   }
 }
@@ -188,15 +199,16 @@ export default {
 <style soped lang="less">
   .logo-box {
     height: 75px;
-    /*box-shadow: 0px 2px 3px -1px rgba(223, 223, 223, .2);*/
     font-size: 16px;
     font-weight: bold;
     user-select: none;
     overflow: hidden;
     display: flex;
-    justify-content: center;
     cursor: pointer;
+    justify-content: center;
     background-color: #3949AB;
+    transition: .4s ease;
+    /*border-right: 1px dashed rgba(0, 0, 0, .1);*/
   }
 
   .logo-box-content {
@@ -237,8 +249,8 @@ export default {
   }
 
   .outline-button {
-    border: 1px solid orange;
-    padding: 8px 14px;
+    border: 1px solid #FAFAFA;
+    padding: 8px 20px;
     border-radius: 4px;
     font-size: 12px;
     font-weight: bold;
@@ -262,8 +274,8 @@ export default {
   }
 
   .primary-button {
-    background-color: orange;
-    padding: 8px 14px;
+    background-color: #4C62DB;
+    padding: 8px 20px;
     border-radius: 4px;
     font-size: 12px;
     font-weight: bold;
@@ -288,8 +300,6 @@ export default {
     display: flex;
     align-items: center;
     background-color: #3949AB;
-    padding: 0 10px;
-    /*box-shadow: 0 2px 3px -1px rgba(223, 223, 223, .5);*/
     width: 100%;
   }
 
@@ -326,8 +336,7 @@ export default {
     transition: .4s ease;
     padding: 10px;
     z-index: 15;
-    border-bottom: 1px solid rgba(0, 0, 0, .02);
-    box-shadow: 0 2px 3px -1px rgba(223, 223, 223, .5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .top-navbar-fixed-menu-mask {
@@ -341,15 +350,15 @@ export default {
   }
 
   #top-navbar-placeholder {
-    padding: 0 10px;
     flex: 1;
   }
 
   #top-navbar-content {
     flex: 1;
+    height: 100%;
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 10px 0;
   }
 
   #top-navbar-menu {
@@ -360,21 +369,23 @@ export default {
   }
 
   .sidebar-open-control-button {
-    margin-right: 20px;
+    width: 43px;
+    border-radius: 50%;
     font-size: 18px;
-    padding: 5px;
+    padding: 8px;
     cursor: pointer;
     transition: .4s ease;
     color: #FAFAFA;
     user-select: none;
+    text-align: center;
   }
 
   .sidebar-open-control-button:hover {
-    color: green;
+    background-color: rgba(0, 0, 0, .2);
   }
 
   .sidebar-open-control-button:active {
-    color: red;
+    background-color: rgba(0, 0, 0, .4);
   }
 
   input::-webkit-input-placeholder {

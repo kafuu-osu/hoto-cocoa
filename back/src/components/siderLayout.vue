@@ -120,6 +120,7 @@ export default {
   background-color: #141414;
   transition: .4s ease;
   overflow: hidden;
+  /*box-shadow: 2px 0 3px -1px rgba(0, 0, 0, .1);*/
 }
 
 .sider-layout-box-fixed {
