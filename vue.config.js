@@ -3,6 +3,7 @@ module.exports = {
     disableHostCheck: true,
     port: 8080
   },
+  assetsDir: 'assets',
 
   pluginOptions: {
     i18n: {
