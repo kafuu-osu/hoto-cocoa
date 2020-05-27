@@ -88,45 +88,6 @@ export default {
 </script>
 
 <style>
-html,body{
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-input{
-  background:none;
-  outline:none;
-  border:none;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 150px;
-  background: #898989;
-}
-::-webkit-scrollbar-thumb:hover {
-  border-radius: 150px;
-  background: #4A4A4A;
-}
-::-webkit-scrollbar-track {
-  border-radius: 150px;
-  background: #ccc;
-}
-
-.ant-popover-arrow {
-  display: none !important;
-}
-.ant-popover-inner-content {
-  padding: 0 0 !important;
-}
-.ant-tooltip-arrow {
-  display: none !important;
-}
-
 #app {
   font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -155,4 +116,11 @@ input{
   transition: .4s ease;
   cursor: pointer;
 }
+
+.logo-text {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif, Arial, Helvetica;
+}
+
 </style>

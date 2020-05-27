@@ -28,6 +28,7 @@
             </div>
             <div
               style="transition: .2s ease; text-align: center;"
+              class="logo-text"
               :style="logoTextStyle"
             >
               osu!Kafuu
@@ -370,7 +371,8 @@ export default {
   }
 
   .sidebar-open-control-button {
-    width: 43px;
+    width: 41px;
+    height: 41px;
     border-radius: 50%;
     font-size: 18px;
     padding: 8px;

@@ -1,10 +1,3 @@
-import Home from '../views/Home.vue'
-import Ranking from '../views/Ranking.vue'
-import Introduce from '../views/Introduce.vue'
-import Switcher from '../views/Switcher.vue'
-import Login from '../views/Login.vue'
-import NotFound from '../views/404.vue'
-
 export default [
   {
     path: '/',
@@ -12,7 +5,7 @@ export default [
     title: '主页',
     icon: 'home',
     show: true,
-    component: Home
+    component: () => import(/* webpackChunkName: "home-group" */ '../views/Home.vue')
   },
   {
     path: '/ranking',
@@ -20,35 +13,35 @@ export default [
     title: '排行',
     icon: 'up-circle',
     show: true,
-    component: Ranking
+    component: () => import(/* webpackChunkName: "home-group" */ '../views/Ranking.vue')
   },
   {
     path: '/introduce',
     name: 'Introduce',
     title: '介绍',
     show: false,
-    component: Introduce
+    component: () => import(/* webpackChunkName: "introduce-group" */ '../views/Introduce.vue')
   },
   {
     path: '/switcher',
     name: 'Switcher',
     title: '切换器',
     show: false,
-    component: Switcher
+    component: () => import(/* webpackChunkName: "introduce-group" */ '../views/Switcher.vue')
   },
   {
     path: '/login',
     name: 'Login',
     title: '登录',
     show: false,
-    component: Login
+    component: () => import(/* webpackChunkName: "login-group" */ '../views/Login.vue')
   },
   {
     path: '/404',
     name: 'page not found',
     title: '页面未找到',
     show: false,
-    component: NotFound
+    component: () => import('../views/404.vue')
   },
   {
     path: '*',

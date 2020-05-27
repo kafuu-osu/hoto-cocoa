@@ -25,6 +25,7 @@
               </div>
               <div
                 style="transition: .2s ease; text-align: center;"
+                class="logo-text"
                 :style="logoTextStyle"
               >
                 osu!Kafuu
