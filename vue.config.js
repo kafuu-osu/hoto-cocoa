@@ -85,15 +85,7 @@ module.exports = {
 
   css: {
     extract: IS_PROD,
-    requireModuleExtension: false,
-    loaderOptions: {
-      less: {
-        modifyVars: {
-
-        },
-        javascriptEnabled: true
-      }
-    }
+    requireModuleExtension: false
   }
 
 }
